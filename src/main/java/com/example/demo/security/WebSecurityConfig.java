@@ -12,13 +12,12 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-	
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/register", "/login", "/css/**").permitAll()
+                .requestMatchers("/register", "/login").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
