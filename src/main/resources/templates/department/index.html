@@ -17,7 +17,7 @@
 			<table>
 			<tr th:each="department : ${departmentList}">
             <td th:text="${department.nameJp}"></td>
-			<td><button type="submit">編集</button></td>
+			<td><button type="submit"　><a th:href="@{/department/edit/{id}(id=${department.id})}">編集</a></button></td>
             </tr>
 			</table>
     </body>

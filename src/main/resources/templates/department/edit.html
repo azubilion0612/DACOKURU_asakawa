@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8">
+        <title layout:title-pattern="$CONTENT_TITLE - 打刻システム">打刻システム</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+		<h1>部署編集削除</h1>
+		<form th:action="@{/department/update/{id}(id=${department.id})}" th:method="POST">
+	        <div>
+	            <label>編集前</label>
+	            <input type="text" name="name_jp" th:value="${department.nameJp}">
+	            <input type="text" name="name_en" th:value="${department.nameEn}">
+	        </div>
+	        <div>
+		        <label>変更後</label>
+		        <input type="text" name="NewNameJp">
+	        </div>
+	        <div>
+		        <label>変更後（英語）</label>
+		        <input type="text" name="NewNameEn">
+	        </div>
+	        <div>
+		        <button type="submit">登録</button>
+	            <button type="delete">削除</button>
+		    </div>
+		</form>
+	</body>
+</html>

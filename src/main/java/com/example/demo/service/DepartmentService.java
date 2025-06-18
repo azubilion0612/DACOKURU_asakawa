@@ -9,5 +9,9 @@ public interface DepartmentService {
 	void createDepartment(String namejp, String nameEn);
 	
 	public List<Department> departmentList();
+	
+	Department findDepartmentById(Long departmentId);
+	
+	void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn);
 
 }

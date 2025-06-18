@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +35,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 	public List<Department> departmentList(){
 		String sql = """
 				SELECT
-				    name_jp
+				    id,name_jp
 				FROM
 				    departments
 				""";
@@ -44,7 +45,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		
 		List<Department> result = new ArrayList<Department>();
 		for(Map<String, Object> one : list) {
-			Department department = new Department();
+            Department department = new Department();
 		department.setId((Long) one.get("id"));
 		department.setNameJp((String) one.get("name_jp"));
 		
@@ -53,5 +54,28 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		
 		return result;
 	}
+	
+	@Override
+	public Department findDepartmentById(Long departmentId) {
+		String sql = """
+			SELECT
+		      id, name_jp, name_en
+			FROM
+			  departments
+			WHERE id = ?
+			""";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Department.class), departmentId);
+				
+	}
 
+	@Override
+	public void updateDepartment(Long departmentId, String updateNameJp, String  updateNameEn) {
+		String sql = """
+				UPDATE departments
+				SET name_jp = ?, name_en= ?
+				WHERE id = ?
+				""";
+		jdbcTemplate.update(sql, updateNameJp, updateNameEn, departmentId);
+
+	}
 }
