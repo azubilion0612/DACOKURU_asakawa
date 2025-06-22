@@ -6,7 +6,7 @@ import com.example.demo.entity.Department;
 
 public interface DepartmentService {
 	
-	void createDepartment(String namejp, String nameEn);
+	void createDepartment(String nameJp, String nameEn);
 	
 	public List<Department> departmentList();
 	

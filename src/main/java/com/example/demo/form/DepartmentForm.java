@@ -6,12 +6,12 @@ import lombok.Data;
 
 public class DepartmentForm {
 	
-	private String NameJp;
+	private String nameJp;
 	
-	private String NameEn;
+	private String nameEn;
 	
-	private String NewNameJp;
+	private String newNameJp;
 	
-	private String NewNameEn;
+	private String newNameEn;
 
 }

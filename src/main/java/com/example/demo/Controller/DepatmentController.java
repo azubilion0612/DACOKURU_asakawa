@@ -27,12 +27,12 @@ public class DepatmentController {
 	public String departmentList(Model model) {
 			List<Department> list = departmentService.departmentList();
 			model.addAttribute("departmentList",list);
-	    return "department/index";
+	    return "/department/index";
 	}
 	
     @GetMapping("/department/create")
     public String create() {
-    	return "department/create";
+    	return "/department/create";
     }
     
     @PostMapping("/department/store")
@@ -41,7 +41,7 @@ public class DepatmentController {
     	    departmentForm.getNameJp(),
             departmentForm.getNameEn()
     	    );
-        return "redirect:department/index";
+        return "redirect:/department/index";
     }
     
     @GetMapping("/department/edit/{departmentId}")

@@ -11,16 +11,16 @@
 		<form th:action="@{/department/update/{id}(id=${department.id})}" th:method="post">
 	        <div>
 	            <label>編集前</label>
-	            <input type="text" name="name_jp" th:value="${department.nameJp}">
-	            <input type="text" name="name_en" th:value="${department.nameEn}">
+	            <input type="text" name="nameJp" th:value="${department.nameJp}" readonly>
+	            <input type="text" name="nameEn" th:value="${department.nameEn}" readonly>
 	        </div>
 	        <div>
 		        <label>変更後</label>
-		        <input type="text" name="NewNameJp">
+		        <input type="text" name="newNameJp">
 	        </div>
 	        <div>
 		        <label>変更後（英語）</label>
-		        <input type="text" name="NewNameEn">
+		        <input type="text" name="newNameEn">
 	        </div>
 	        <div>
 		        <button type="submit" onclick="return confirm('こちらの部署を編集してもよろしいでしょうか？')">登録</button>
