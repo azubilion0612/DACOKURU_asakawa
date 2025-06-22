@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Department;
 import com.example.demo.form.DepartmentForm;
@@ -52,7 +53,6 @@ public class DepatmentController {
     	return "/department/edit";
     }
     
-    
     @PostMapping("/department/update/{departmentId}")
     private String updateDepartment(
     	@PathVariable("departmentId") Long departmentId,
@@ -60,6 +60,22 @@ public class DepatmentController {
     	    String updateNameJp = form.getNewNameJp();
     	    String updateNameEn = form.getNewNameEn();
     	departmentService.updateDepartment(departmentId, updateNameJp, updateNameEn);
+    	return "redirect:/department/index";
+    }
+    
+    @PostMapping("/department/searchresult")
+    private String searchDepartmentList(
+    	@RequestParam("searchDepartment") String searchDepartment,
+    	Model model) {
+    	    List<Department>list = departmentService.departmentList(searchDepartment);
+    	    model.addAttribute("departmentList", list);
+    	return "/department/index";
+    }
+    
+    @PostMapping("/department/delete/{departmentId}")
+    private String deleteDepartment(
+    @PathVariable("departmentId") Long departmentId) {
+    	departmentService.deleteDepartment(departmentId);
     	return "redirect:/department/index";
     }
 }

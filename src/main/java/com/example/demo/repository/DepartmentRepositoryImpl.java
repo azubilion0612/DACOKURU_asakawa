@@ -22,23 +22,22 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 	@Override
 	public void createDepartment(String nameJp, String nameEn) {
 		String sql = """
-				INSERT INTO
-				  departments (name_jp, name_en)
-				VALUES
-				  (?, ?)
-				""";
+			INSERT INTO
+			    departments (name_jp, name_en)
+			VALUES
+			    (?, ?)
+			""";
 		jdbcTemplate.update(sql, nameJp, nameEn);
-
 	}
 	
 	@Override
 	public List<Department> departmentList(){
 		String sql = """
-				SELECT
-				    id,name_jp
-				FROM
-				    departments
-				""";
+			SELECT
+				id,name_jp
+			FROM
+			    departments
+			""";
 		
 		List<Map<String, Object>> list
 		    = jdbcTemplate.queryForList(sql);
@@ -51,7 +50,6 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 		
 		        result.add(department);
 		}
-		
 		return result;
 	}
 	
@@ -64,18 +62,55 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 			  departments
 			WHERE id = ?
 			""";
-		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Department.class), departmentId);
-				
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Department.class), departmentId);		
 	}
-
 	@Override
 	public void updateDepartment(Long departmentId, String updateNameJp, String  updateNameEn) {
 		String sql = """
-				UPDATE departments
-				SET name_jp = ?, name_en= ?
-				WHERE id = ?
-				""";
+			UPDATE departments
+			SET 
+			    name_jp = ?, name_en= ?
+			WHERE id = ?
+			""";
 		jdbcTemplate.update(sql, updateNameJp, updateNameEn, departmentId);
 
+	}
+	
+	@Override
+	public List<Department> departmentList(String searchDepartment){
+		String sql = """
+		    SELECT
+			    id, name_jp, name_en
+		    FROM
+				departments
+		    WHERE
+		        name_jp LIKE ?
+		    OR
+		        name_en LIKE ?
+			""";
+		String p = "%" + searchDepartment + "%";
+		List<Map<String, Object>> list
+		    = jdbcTemplate.queryForList(sql, p, p);
+		List<Department> result = new ArrayList<Department>();
+		for (Map<String, Object> one : list) {
+			Department department = new Department();
+			department.setId((Long) one.get("id"));
+			department.setNameJp((String) one.get("name_jp"));
+			department.setNameEn((String) one.get("name_en"));
+			result.add(department);
+		}  
+		    return result;
+	}
+	
+	@Override
+	public void deleteDepartment(Long departmentId) {
+		String sql = """
+			DELETE
+			FROM
+			    departments
+			WHERE
+			    id = ?
+			""";
+		jdbcTemplate.update(sql, departmentId);
 	}
 }

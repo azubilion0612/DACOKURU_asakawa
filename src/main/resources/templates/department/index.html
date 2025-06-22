@@ -7,18 +7,21 @@
         <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
-		<h1>部署一覧<h1>
-	<div class ="search-department">
-		<label>キーワード</label>
-			<input type="text">
-			<button type="submit">検索</button>
-			<button type="subnit">クリア</button>
-			<button type="submit"><a th:href="@{/department/create}">部署新規追加</a></button>
+		<h1>部署一覧</h1>
+	    <div class ="search-department">
+		    <form th:action="@{/department/searchresult}" th:method="post">
+		        <label>キーワード</label>
+			    <input type="text" name="searchDepartment">
+			    <button>検索</button>
+				<input type="reset" value="クリア">
+				<button type="submit"><a th:href="@{/department/create}">部署新規追加</a></button>
+			</form>
 			<table>
-			<tr th:each="department : ${departmentList}">
-            <td th:text="${department.nameJp}"></td>
-			<td><button type="submit"　><a th:href="@{/department/edit/{id}(id=${department.id})}">編集</a></button></td>
-            </tr>
+			    <tr th:each="department : ${departmentList}">
+                    <td th:text="${department.nameJp}"></td>
+			        <td><button type="submit"　><a th:href="@{/department/edit/{id}(id=${department.id})}">編集</a></button></td>
+                </tr>
 			</table>
+		</div> 
     </body>
 </html>

@@ -36,5 +36,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn) {
         departmentRepository.updateDepartment(departmentId, updateNameJp, updateNameEn);
 	}
-		
+	
+	@Override
+	public List<Department> departmentList(String searchDepartment){
+		List<Department> list = departmentRepository.departmentList(searchDepartment);
+		return list;
+	}
+	
+	@Override
+	public void deleteDepartment(Long departmentId) {
+		departmentRepository.deleteDepartment(departmentId);
+	}
+
 }

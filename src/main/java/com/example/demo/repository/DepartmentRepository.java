@@ -13,4 +13,8 @@ public interface DepartmentRepository {
 	Department findDepartmentById(Long departmentId);
 	
 	void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn);
+	
+	public List<Department> departmentList(String searchDepartment);
+	
+	void deleteDepartment(Long departmentId);
 }

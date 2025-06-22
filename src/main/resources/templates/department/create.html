@@ -8,21 +8,21 @@
     </head>
     <body>
         <h1>新規部署登録</h1>
-    </body>
-	<div class="create-department">
-		<form th:action="@{/department/store}" th:method="POST">
-		<div>
-		<label>作成する部署名</label>
-		<input type="text" name="nameJp" placeholder="新しい部署名">
-		</div>
-		<div></div>
-		<lable>部署名（英語）</lable>
-		<input type="text" name="nameEn" placeholder="新しい部署名（英語）">
-		</div>
-		<div>
-		<button type="submit">登録</button>
-		</div>
-		</form>
-	</div>
-	<a th:href="@{/department/index}">部署一覧へ戻る</a>
+    	<div class="create-department">
+		    <form th:action="@{/department/store}" th:method="POST">
+		        <div>
+		            <label>作成する部署名</label>
+		            <input type="text" name="nameJp" placeholder="新しい部署名">
+		        </div>
+			    <div>
+		            <lable>部署名（英語）</lable>
+		            <input type="text" name="nameEn" placeholder="新しい部署名（英語）">
+		        </div>
+		        <div>
+		            <button type="submit">登録</button>
+		        </div>
+		    </form>
+	    </div>
+	    <a th:href="@{/department/index}">部署一覧へ戻る</a>
+	</body>
 </html>
