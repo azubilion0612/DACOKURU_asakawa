@@ -10,7 +10,7 @@ public interface DepartmentService {
 	
 	public List<Department> departmentList();
 	
-	Department findDepartmentById(Long departmentId);
+	public Department findDepartmentById(Long departmentId);
 	
 	void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn);
 	

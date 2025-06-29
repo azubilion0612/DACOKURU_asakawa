@@ -18,34 +18,38 @@ public class DepartmentServiceImpl implements DepartmentService {
 	
 	@Override
 	public void createDepartment(String nameJp, String nameEn) {
-		departmentRepository.createDepartment(nameJp, nameEn);
-	}
-	
-	@Override
-	public List<Department> departmentList(){
-		List<Department> list = departmentRepository.departmentList();
-		return list;
-	}
-	
-	@Override
-	public Department findDepartmentById(Long departmentId) {
-		return departmentRepository.findDepartmentById(departmentId);
-	}
-	
-	@Override
-	public void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn) {
-        departmentRepository.updateDepartment(departmentId, updateNameJp, updateNameEn);
-	}
-	
-	@Override
-	public List<Department> departmentList(String searchDepartment){
-		List<Department> list = departmentRepository.departmentList(searchDepartment);
-		return list;
-	}
-	
-	@Override
-	public void deleteDepartment(Long departmentId) {
-		departmentRepository.deleteDepartment(departmentId);
-	}
+        Department department = new Department();
+        department.setNameJp(nameJp);
+        department.setNameEn(nameEn);
+        departmentRepository.save(department);
+    }
 
+	@Override
+    public List<Department> departmentList() {
+        return departmentRepository.findAll();
+    }
+
+	@Override
+    public Department findDepartmentById(Long id) {
+        return departmentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("部署が見つかりませんでした"));
+    }
+
+	@Override
+    public void updateDepartment(Long id, String nameJp, String nameEn) {
+        Department department = findDepartmentById(id);
+        department.setNameJp(nameJp);
+        department.setNameEn(nameEn);
+        departmentRepository.save(department);
+    }
+
+	@Override
+    public List<Department> departmentList(String searchName) {
+        return departmentRepository.findByNameJpContainingIgnoreCase(searchName);
+    }
+
+	@Override
+    public void deleteDepartment(Long id) {
+        departmentRepository.deleteById(id);
+    }
 }

@@ -2,19 +2,11 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.example.demo.entity.Department;
 
-public interface DepartmentRepository {
-	
-	void createDepartment(String nameJp, String nameEn);
-	
-	List<Department> departmentList();
-	
-	Department findDepartmentById(Long departmentId);
-	
-	void updateDepartment(Long departmentId, String updateNameJp, String updateNameEn);
-	
-	public List<Department> departmentList(String searchDepartment);
-	
-	void deleteDepartment(Long departmentId);
+public interface DepartmentRepository extends JpaRepository<Department, Long>{
+		
+	List<Department> findByNameJpContainingIgnoreCase(String nameJp);
 }
