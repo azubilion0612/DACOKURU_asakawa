@@ -17,5 +17,13 @@ public interface DepartmentService {
 	public List<Department> departmentList(String searchDepartment);
 	
 	void deleteDepartment(Long departmentId);
+	
+	public boolean existsByNameJpExcludingId(String nameJp, Long id);
 
+	public boolean existsByNameEnExcludingId(String nameEn, Long id);
+	
+	public boolean existsByNameJp(String nameJp);
+
+	public boolean existsByNameEn(String nameEn);
+	
 }

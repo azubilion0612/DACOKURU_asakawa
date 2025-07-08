@@ -45,11 +45,31 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
     public List<Department> departmentList(String searchName) {
-        return departmentRepository.findByNameJpContainingIgnoreCase(searchName);
+        return departmentRepository.findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(searchName, searchName);
     }
 
 	@Override
     public void deleteDepartment(Long id) {
         departmentRepository.deleteById(id);
     }
+	
+	@Override
+	public boolean existsByNameJpExcludingId(String nameJp, Long id) {
+	    return departmentRepository.existsByNameJpAndIdNot(nameJp, id);
+	}
+	
+	@Override
+	public boolean existsByNameEnExcludingId(String nameEn, Long id) {
+	    return departmentRepository.existsByNameEnAndIdNot(nameEn, id);
+	}
+	
+	@Override
+	public boolean existsByNameJp(String nameJp) {
+	    return departmentRepository.existsByNameJp(nameJp);
+	}
+	
+	@Override
+	public boolean existsByNameEn(String nameEn) {
+	    return departmentRepository.existsByNameEn(nameEn);
+	}
 }
