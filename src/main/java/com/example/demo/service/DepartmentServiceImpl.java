@@ -13,29 +13,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 
 public class DepartmentServiceImpl implements DepartmentService {
-	
-	private final DepartmentRepository departmentRepository;
-	
-	@Override
-	public void createDepartment(String nameJp, String nameEn) {
+
+    private final DepartmentRepository departmentRepository;
+
+    @Override
+    public void createDepartment(String nameJp, String nameEn) {
         Department department = new Department();
         department.setNameJp(nameJp);
         department.setNameEn(nameEn);
         departmentRepository.save(department);
     }
 
-	@Override
+    @Override
     public List<Department> departmentList() {
         return departmentRepository.findAll();
     }
 
-	@Override
+    @Override
     public Department findDepartmentById(Long id) {
         return departmentRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("部署が見つかりませんでした"));
     }
 
-	@Override
+    @Override
     public void updateDepartment(Long id, String nameJp, String nameEn) {
         Department department = findDepartmentById(id);
         department.setNameJp(nameJp);
@@ -43,33 +43,33 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.save(department);
     }
 
-	@Override
+    @Override
     public List<Department> departmentList(String searchName) {
         return departmentRepository.findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(searchName, searchName);
     }
 
-	@Override
+    @Override
     public void deleteDepartment(Long id) {
         departmentRepository.deleteById(id);
     }
-	
-	@Override
-	public boolean existsByNameJpExcludingId(String nameJp, Long id) {
-	    return departmentRepository.existsByNameJpAndIdNot(nameJp, id);
-	}
-	
-	@Override
-	public boolean existsByNameEnExcludingId(String nameEn, Long id) {
-	    return departmentRepository.existsByNameEnAndIdNot(nameEn, id);
-	}
-	
-	@Override
-	public boolean existsByNameJp(String nameJp) {
-	    return departmentRepository.existsByNameJp(nameJp);
-	}
-	
-	@Override
-	public boolean existsByNameEn(String nameEn) {
-	    return departmentRepository.existsByNameEn(nameEn);
-	}
+
+    @Override
+    public boolean existsByNameJpExcludingId(String nameJp, Long id) {
+        return departmentRepository.existsByNameJpAndIdNot(nameJp, id);
+    }
+
+    @Override
+    public boolean existsByNameEnExcludingId(String nameEn, Long id) {
+        return departmentRepository.existsByNameEnAndIdNot(nameEn, id);
+    }
+
+    @Override
+    public boolean existsByNameJp(String nameJp) {
+        return departmentRepository.existsByNameJp(nameJp);
+    }
+
+    @Override
+    public boolean existsByNameEn(String nameEn) {
+        return departmentRepository.existsByNameEn(nameEn);
+    }
 }
