@@ -24,25 +24,25 @@ import lombok.RequiredArgsConstructor;
 
 public class DepatmentController {
 
-	private final DepartmentService departmentService;
-		
-	@GetMapping("/department/index")
-	public String departmentList(Model model) {
-			List<Department> list = departmentService.departmentList();
-			model.addAttribute("departmentList",list);
-	    return "/department/index";
-	}
-	
+    private final DepartmentService departmentService;
+
+    @GetMapping("/department/index")
+    public String departmentList(Model model) {
+            List<Department> list = departmentService.departmentList();
+            model.addAttribute("departmentList",list);
+        return "/department/index";
+    }
+
     @GetMapping("/department/create")
     public String create(Model model) {
         model.addAttribute("departmentForm", new DepartmentForm());
-    	return "/department/create";
+        return "/department/create";
     }
     
     @PostMapping("/department/store")
     private String createDeprtment(
-    	@ModelAttribute("departmentForm") @Valid DepartmentForm departmentForm,BindingResult result, Model model) {
-    	if (result.hasErrors()) {
+        @ModelAttribute("departmentForm") @Valid DepartmentForm departmentForm,BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "/department/create"; 
     }
         if (departmentService.existsByNameJp(departmentForm.getNameJp())) {
@@ -54,31 +54,31 @@ public class DepatmentController {
         if (result.hasErrors()) {
             return "/department/create";
     }
-    	    departmentService.createDepartment(
-    	    departmentForm.getNameJp(),
+            departmentService.createDepartment(
+            departmentForm.getNameJp(),
             departmentForm.getNameEn()
-    	    );
+            );
         return "redirect:/department/index";
     }
-    
+
     @GetMapping("/department/edit/{departmentId}")
     private String editDepartment(
-    	@PathVariable("departmentId") Long departmentId,
-    	Model model){
-    		Department department = departmentService.findDepartmentById(departmentId);
-    	    DepartmentForm form = new DepartmentForm();
-    		model.addAttribute("department", department);
-    		model.addAttribute("departmentForm", form);
-    	return "/department/edit";
+        @PathVariable("departmentId") Long departmentId,
+        Model model){
+            Department department = departmentService.findDepartmentById(departmentId);
+            DepartmentForm form = new DepartmentForm();
+            model.addAttribute("department", department);
+            model.addAttribute("departmentForm", form);
+        return "/department/edit";
     }
     
     @PostMapping("/department/update/{departmentId}")
     private String updateDepartment(
-    	@PathVariable("departmentId") Long departmentId,
-    	@ModelAttribute("departmentForm") @Valid DepartmentForm form, BindingResult result, Model model
-    	) {
-    	if (result.hasErrors()) {
-    		model.addAttribute("department", departmentService.findDepartmentById(departmentId));
+        @PathVariable("departmentId") Long departmentId,
+        @ModelAttribute("departmentForm") @Valid DepartmentForm form, BindingResult result, Model model
+        ) {
+        if (result.hasErrors()) {
+            model.addAttribute("department", departmentService.findDepartmentById(departmentId));
             return "/department/edit"; 
     }
         if (departmentService.existsByNameJpExcludingId(form.getNameJp(), departmentId)) {
@@ -91,25 +91,25 @@ public class DepatmentController {
             model.addAttribute("department", departmentService.findDepartmentById(departmentId));
             return "/department/edit";
     }
-    	String updateNameJp = form.getNameJp();
-    	String updateNameEn = form.getNameEn();
-    	departmentService.updateDepartment(departmentId, updateNameJp, updateNameEn);
-    	return "redirect:/department/index";
+        String updateNameJp = form.getNameJp();
+        String updateNameEn = form.getNameEn();
+        departmentService.updateDepartment(departmentId, updateNameJp, updateNameEn);
+        return "redirect:/department/index";
     }
-    
+
     @PostMapping("/department/searchresult")
     private String searchDepartmentList(
-    	@RequestParam("searchDepartment") String searchDepartment,
-    	Model model) {
-    	    List<Department>list = departmentService.departmentList(searchDepartment);
-    	    model.addAttribute("departmentList", list);
-    	return "/department/index";
+        @RequestParam("searchDepartment") String searchDepartment,
+        Model model) {
+            List<Department>list = departmentService.departmentList(searchDepartment);
+            model.addAttribute("departmentList", list);
+        return "/department/index";
     }
-    
+
     @PostMapping("/department/delete/{departmentId}")
     private String deleteDepartment(
     @PathVariable("departmentId") Long departmentId) {
-    	departmentService.deleteDepartment(departmentId);
-    	return "redirect:/department/index";
+        departmentService.deleteDepartment(departmentId);
+        return "redirect:/department/index";
     }
 }

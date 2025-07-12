@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.demo.entity.Department;
 
 public interface DepartmentService {
-    
+
     void createDepartment(String nameJp, String nameEn);
 
     public List<Department> departmentList();
