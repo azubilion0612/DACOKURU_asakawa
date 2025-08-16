@@ -25,5 +25,7 @@ public interface DepartmentService {
     public boolean existsByNameJp(String nameJp);
 
     public boolean existsByNameEn(String nameEn);
+    
+    public long countDepartment(String searchName);
 
 }

@@ -102,7 +102,10 @@ public class DepatmentController {
         @RequestParam("searchDepartment") String searchDepartment,
         Model model) {
             List<Department>list = departmentService.departmentList(searchDepartment);
+            long count = departmentService.countDepartment(searchDepartment);
             model.addAttribute("departmentList", list);
+            model.addAttribute("searchDepartment", searchDepartment);
+            model.addAttribute("countDepartment", count);
         return "/department/index";
     }
 

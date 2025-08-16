@@ -16,7 +16,7 @@ public class DepartmentForm {
 
     @NotBlank(message = "部署名（英語）を入力してください")
     @Size(min = 1, max = 255, message = "部署名(英語)は1文字以上、255文字以内で入力してください。")
-    @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "部署名（英語）は半角英数字で入力してください。	")
+    @Pattern(regexp = "^[a-zA-Z0-9\\ss\\-_.(),/&]+$", message = "部署名（英語）は半角英数字で入力してください。	")
     private String nameEn;
 
 }

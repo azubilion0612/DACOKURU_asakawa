@@ -26,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> departmentList() {
-        return departmentRepository.findAll();
+        return departmentRepository.findAllByOrderByNameJpDesc();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> departmentList(String searchName) {
-        return departmentRepository.findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(searchName, searchName);
+        return departmentRepository.findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCaseOrderByNameJpDesc(searchName, searchName);
     }
 
     @Override
@@ -71,5 +71,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public boolean existsByNameEn(String nameEn) {
         return departmentRepository.existsByNameEn(nameEn);
+    }
+    
+    @Override
+    public long countDepartment(String searchName) {
+        return departmentRepository.countByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(searchName, searchName);
     }
 }

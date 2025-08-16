@@ -8,7 +8,9 @@ import com.example.demo.entity.Department;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long>{
 
-    List<Department> findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(String nameJp, String nameEn);
+    List<Department> findByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCaseOrderByNameJpDesc(String nameJp, String nameEn);
+    
+    List<Department> findAllByOrderByNameJpDesc();
 
     boolean existsByNameJpAndIdNot(String nameJp, Long id);
 
@@ -17,5 +19,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long>{
     boolean existsByNameJp(String nameJp);
 
     boolean existsByNameEn(String nameEn);
+    
+    long countByNameJpContainingIgnoreCaseOrNameEnContainingIgnoreCase(String nameJp,String nameEn);
 
 }
