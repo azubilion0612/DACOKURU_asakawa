@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Department;
 import com.example.demo.form.DepartmentForm;
+import com.example.demo.form.SearchDepartmentForm;
 import com.example.demo.service.DepartmentService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +30,7 @@ public class DepatmentController {
     public String departmentList(Model model) {
             List<Department> list = departmentService.departmentList();
             model.addAttribute("departmentList",list);
+            model.addAttribute("searchDepartmentForm", new SearchDepartmentForm());
         return "/department/index";
     }
 
@@ -99,13 +100,17 @@ public class DepatmentController {
 
     @PostMapping("/department/searchresult")
     private String searchDepartmentList(
-        @RequestParam("searchDepartment") String searchDepartment,
-        Model model) {
-            List<Department>list = departmentService.departmentList(searchDepartment);
-            long count = departmentService.countDepartment(searchDepartment);
-            model.addAttribute("departmentList", list);
-            model.addAttribute("searchDepartment", searchDepartment);
-            model.addAttribute("countDepartment", count);
+        @ModelAttribute("searchDepartmentForm") @Valid SearchDepartmentForm form, BindingResult result, Model model
+        ) {
+        if (result.hasErrors()) {
+            return "/department/index";
+    }
+        String searchDepartment = form.getSearchDepartment();
+        List<Department>list = departmentService.departmentList(searchDepartment);
+        long count = departmentService.countDepartment(searchDepartment);
+        model.addAttribute("departmentList", list);
+        model.addAttribute("searchDepartment", searchDepartment);
+        model.addAttribute("countDepartment", count);
         return "/department/index";
     }
 

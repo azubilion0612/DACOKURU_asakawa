@@ -9,12 +9,13 @@
     <body>
         <h1>部署一覧</h1>
         <div class = "search-department">
-            <form th:action="@{/department/searchresult}" th:method="post">
+            <form th:action="@{/department/searchresult}" th:method="post" th:object="${searchDepartmentForm}">
                 <label>キーワード</label>
-                <input type="text" name="searchDepartment" th:value="${searchDepartment}" placeholder="検索したい部署名を入力">
+                <input type="text" th:field="*{searchDepartment}" placeholder="検索したい部署名を入力">
                 <button>検索</button>
-                <input type="reset" value="クリア">
+                <input type="button" value="クリア" onclick="this.form.searchDepartment.value='';">
                 <button type="submit"><a th:href="@{/department/create}">部署新規追加</a></button>
+                <p th:if="${#fields.hasErrors('searchDepartment')}" th:errors="*{searchDepartment}"></p>
             </form>
             <p th:if="${countDepartment != null}">検索結果：<span th:text="${countDepartment}"></span>件</p>
             <table>
