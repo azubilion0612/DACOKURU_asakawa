@@ -100,10 +100,10 @@ public class DepatmentController {
 
     @PostMapping("/department/searchresult")
     private String searchDepartmentList(
-        @ModelAttribute("searchDepartmentForm") @Valid SearchDepartmentForm form, BindingResult result, Model model
-        ) {
-        if (result.hasErrors()) {
-            return "/department/index";
+    @ModelAttribute("searchDepartmentForm") @Valid SearchDepartmentForm form, BindingResult result, Model model
+    ) {
+    if (result.hasErrors()) {
+        return "/department/index";
     }
         String searchDepartment = form.getSearchDepartment();
         List<Department>list = departmentService.departmentList(searchDepartment);
