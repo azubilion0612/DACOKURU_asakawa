@@ -21,7 +21,7 @@
                     <p th:if="${#fields.hasErrors('nameEn')}" th:errors="*{nameEn}">エラー</p>
                 </div>
                 <div>
-                    <button type="submit">登録</button>
+                    <button type="submit" onclick="return confirm('登録します。宜しいですか？')">登録</button>
                 </div>
             </form>
         </div>

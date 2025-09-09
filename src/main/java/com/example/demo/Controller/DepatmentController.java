@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Department;
 import com.example.demo.form.DepartmentForm;
@@ -42,7 +43,7 @@ public class DepatmentController {
     
     @PostMapping("/department/store")
     private String createDeprtment(
-        @ModelAttribute("departmentForm") @Valid DepartmentForm departmentForm,BindingResult result, Model model) {
+        @ModelAttribute("departmentForm") @Valid DepartmentForm departmentForm,BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "/department/create"; 
     }
@@ -59,6 +60,7 @@ public class DepatmentController {
             departmentForm.getNameJp(),
             departmentForm.getNameEn()
             );
+            redirectAttributes.addFlashAttribute("message", "登録しました。");
         return "redirect:/department/index";
     }
 
@@ -76,7 +78,7 @@ public class DepatmentController {
     @PostMapping("/department/update/{departmentId}")
     private String updateDepartment(
         @PathVariable("departmentId") Long departmentId,
-        @ModelAttribute("departmentForm") @Valid DepartmentForm form, BindingResult result, Model model
+        @ModelAttribute("departmentForm") @Valid DepartmentForm form, BindingResult result, Model model, RedirectAttributes redirectAttributes
         ) {
         if (result.hasErrors()) {
             model.addAttribute("department", departmentService.findDepartmentById(departmentId));
@@ -95,7 +97,8 @@ public class DepatmentController {
         String updateNameJp = form.getNameJp();
         String updateNameEn = form.getNameEn();
         departmentService.updateDepartment(departmentId, updateNameJp, updateNameEn);
-        return "redirect:/department/index";
+        redirectAttributes.addFlashAttribute("message", "更新しました。");
+        return "redirect:/department/edit/{departmentId}";
     }
 
     @PostMapping("/department/searchresult")
@@ -116,8 +119,9 @@ public class DepatmentController {
 
     @PostMapping("/department/delete/{departmentId}")
     private String deleteDepartment(
-    @PathVariable("departmentId") Long departmentId) {
+    @PathVariable("departmentId") Long departmentId, RedirectAttributes redirectAttributes) {
         departmentService.deleteDepartment(departmentId);
+        redirectAttributes.addFlashAttribute("message", "削除しました。");
         return "redirect:/department/index";
     }
 }
