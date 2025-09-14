@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
     <main layout:fragment="content">
+        <pre id="clock"></pre>
         <h2>打刻トップ</h2>
         <div>
             <form method="post" th:action="@{/timestamp/store}" th:object="${timestampForm}">
