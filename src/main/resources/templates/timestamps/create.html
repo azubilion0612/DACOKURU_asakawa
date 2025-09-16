@@ -47,8 +47,8 @@
         <div>
             <span th:if="${successMessage}" th:text="${successMessage}"></span>
         </div>
-        <p>打刻履歴</p>
         <div>
+            <p>打刻履歴</p>
             <table>
                 <tr th:each="timestampHistory : ${timestampHistories}">
                     <td th:text="${timestampHistory.date}"></td>
