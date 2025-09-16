@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
     <main layout:fragment="content">
-        <pre id="clock"></pre>
         <h2>打刻トップ</h2>
         <div>
+            <div id="date"></div>
+            <div id="time"></div>
             <form method="post" th:action="@{/timestamp/store}" th:object="${timestampForm}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     
@@ -46,9 +47,8 @@
         <div>
             <span th:if="${successMessage}" th:text="${successMessage}"></span>
         </div>
-
+		<p>打刻履歴</p>
         <div>
-            <h2>打刻履歴</h2>
             <table>
                 <tr th:each="timestampHistory : ${timestampHistories}">
                     <td th:text="${timestampHistory.date}"></td>
