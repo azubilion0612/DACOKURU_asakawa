@@ -44,35 +44,43 @@
                     <label for="oln_jp">旧姓(正式表示)</label>
                     <input id="oln_jp" type="text" name="olnJp" th:value="*{olnJp}">
                     <span th:if="${#fields.hasErrors('olnJp')}" th:errors="*{olnJp}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpValid')}" th:errors="*{oldNameJpValid}"></span>
     
                     <label for="oln_jp_hira">旧姓(ひらがな)</label>
                     <input id="oln_jp_hira" type="text" name="olnJpHira" th:value="*{olnJpHira}">
                     <span th:if="${#fields.hasErrors('olnJpHira')}" th:errors="*{olnJpHira}"
                         class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpHiraValid')}" th:errors="*{oldNameJpHiraValid}"></span>
     
                     <label for="oln_jp_kata">旧姓(カタカナ)</label>
                     <input id="oln_jp_kata" type="text" name="olnJpKata" th:value="*{olnJpKata}">
                     <span th:if="${#fields.hasErrors('olnJpKata')}" th:errors="*{olnJpKata}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpKataValid')}" th:errors="*{oldNameJpKataValid}"></span>
     
                     <label for="oln_en">旧姓(英語)</label>
                     <input id="oln_en" type="text" name="olnEn" th:value="*{olnEn}">
                     <span th:if="${#fields.hasErrors('olnEn')}" th:errors="*{olnEn}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameEnValid')}" th:errors="*{oldNameEnValid}"></span>
     
                     <label for="mn_jp">ミドルネーム(正式表示)</label>
                     <input id="mn_jp" type="text" name="mnJp" th:value="*{mnJp}">
                     <span th:if="${#fields.hasErrors('mnJp')}" th:errors="*{mnJp}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpValid')}" th:errors="*{middleNameJpValid}"></span>
     
                     <label for="mn_jp_hira">ミドルネーム(ひらがな)</label>
                     <input id="mn_jp_hira" type="text" name="mnJpHira" th:value="*{mnJpHira}">
                     <span th:if="${#fields.hasErrors('mnJpHira')}" th:errors="*{mnJpHira}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpHiraValid')}" th:errors="*{middleNameJpHiraValid}"></span>
     
                     <label for="mn_jp_kata">ミドルネーム(カタカナ)</label>
                     <input id="mn_jp_kata" type="text" name="mnJpKata" th:value="*{mnJpKata}">
                     <span th:if="${#fields.hasErrors('mnJpKata')}" th:errors="*{mnJpKata}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpKataValid')}" th:errors="*{middleNameJpKataValid}"></span>
     
                     <label for="mn_en">ミドルネーム(英語)</label>
                     <input id="mn_en" type="text" name="mnEn" th:value="*{mnEn}">
                     <span th:if="${#fields.hasErrors('mnEn')}" th:errors="*{mnEn}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameEnValid')}" th:errors="*{middleNameEnValid}"></span>
     
                     <label for="email">※メールアドレス</label>
                     <input id="email" type="email" name="email" th:value="*{email}">
