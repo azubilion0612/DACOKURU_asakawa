@@ -47,7 +47,7 @@ public class UserForm implements ValidationGroups {
     private String lnJpHira;
 
     @NotBlank(message = "姓(カタカナ)を入力してください。")
-    @Pattern(regexp = "^[\\u30A0-\\u30FF]+$", message = "姓(カタカナ)は全角カタカナで入力してください。")
+    @Pattern(regexp = "^[\\u30A1-\\u30FC]+$", message = "姓(カタカナ)は全角カタカナで入力してください。")
     @Size(min = 1, max = 255, message = "姓(カタカナ)は1文字以上、255文字以内で入力してください。")
     private String lnJpKata;
 
@@ -58,35 +58,27 @@ public class UserForm implements ValidationGroups {
 
     // 旧姓の入力が必要な場合にチェック
     @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "旧姓(正式表示)は全角で入力してください。")
-    @Size(min = 1, max = 255, message ="旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
     private String olnJp;
 
     @Pattern(regexp = "^[\\u3040-\\u309F]+$", message = "旧姓(ひらがな)は全角ひらがなで入力してください。")
-    @Size(min = 1, max = 255, message ="旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
     private String olnJpHira;
 
     @Pattern(regexp = "^[\\u30A0-\\u30FF]+$", message = "旧姓(カタカナ)は全角カタカナで入力してください。")
-    @Size(min = 1, max = 255, message ="旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
     private String olnJpKata;
 
     @Pattern(regexp = "^[a-zA-Z]+$", message = "旧姓(英語)は半角で入力してください。")
-    @Size(min = 1, max = 255, message ="旧姓(英語)は1文字以上、255文字以内で入力してください。")
     private String olnEn;
 
     @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "ミドルネーム(正式表示)は全角で入力してください。")
-    @Size(min = 1, max = 255, message ="ミドルネーム(正式表示)は1文字以上、255文字以内で入力してください。")
     private String mnJp;
 
     @Pattern(regexp = "^[\\u3040-\\u309F]+$", message = "ミドルネーム(ひらがな)は全角ひらがなで入力してください。")
-    @Size(min = 1, max = 255, message ="ミドルネーム(ひらがな)は1文字以上、255文字以内で入力してください。")
     private String mnJpHira;
 
     @Pattern(regexp = "^[\\u30A0-\\u30FF]+$", message = "ミドルネーム(カタカナ)は全角カタカナで入力してください。")
-    @Size(min = 1, max = 255, message ="ミドルネーム(カタカナ)は1文字以上、255文字以内で入力してください。")
     private String mnJpKata;
 
     @Pattern(regexp = "^[a-zA-Z]+$", message = "ミドルネーム(英語)は半角で入力してください。")
-    @Size(min = 1, max = 255, message ="ミドルネーム(英語)は1文字以上、255文字以内で入力してください。")
     private String mnEn;
 
     @NotBlank(message = "メールアドレスを入力してください。")
@@ -100,14 +92,13 @@ public class UserForm implements ValidationGroups {
     private String password;
 
     @NotNull(message = "社員番号を入力してください。")
-    @Size(min = 1, max = 10, message = "社員番号は1桁以上、10桁以内で入力してください。")
-    @Pattern(regexp = "^[0-9]+$")
+    
     private Integer employeeNo;
 
     private Integer currentEmployeeNo;
 
     @NotNull(message = "入社日を入力してください。")
-    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "入社日は日付形式で正しく入力してください。")
+  
     private LocalDate joiningDate;
 
     private Boolean englishNotation;
@@ -123,6 +114,14 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
+    @AssertTrue(message = "旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpLengthValid() {
+        if (olnJp != null && !olnJp.trim().isEmpty()) {
+            return olnJp.length() >= 1 && olnJp.length() <= 255;
+        }
+        return true;
+    }
+
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameJpHiraValid() {
         if ((olnJp != null && !olnJp.isEmpty()) ||
@@ -132,7 +131,15 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-    
+
+    @AssertTrue(message = "旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpHiraLengthValid() {
+        if (olnJpHira != null && !olnJpHira.trim().isEmpty()) {
+            return olnJpHira.length() >= 1 && olnJpHira.length() <= 255;
+        }
+        return true;
+    }
+
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameJpKataValid() {
         if ((olnJp != null && !olnJp.isEmpty()) ||
@@ -142,7 +149,15 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-    
+
+    @AssertTrue(message = "旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpKataLengthValid() {
+        if (olnJpKata != null && !olnJpKata.trim().isEmpty()) {
+            return olnJpKata.length() >= 1 && olnJpKata.length() <= 255;
+        }
+        return true;
+    }
+
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameEnValid() {
         if ((olnJp != null && !olnJp.isEmpty()) ||
@@ -152,7 +167,15 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-    
+
+    @AssertTrue(message = "旧姓(英語)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameEnLengthValid() {
+        if (olnEn != null && !olnEn.trim().isEmpty()) {
+            return olnEn.length() >= 1 && olnEn.length() <= 255;
+        }
+        return true;
+    }
+
  // 旧姓フィールドのいずれかが入力された場合は、それ以外の旧姓フィールドも必須
     @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
     public boolean isMiddleNameJpValid() {
@@ -160,6 +183,14 @@ public class UserForm implements ValidationGroups {
                 (mnJpKata != null && !mnJpKata.isEmpty()) ||
                 (mnEn != null && !mnEn.isEmpty())) {
             return mnJp != null && !mnJp.isEmpty();
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpLengthValid() {
+        if (mnJp != null && !mnJp.trim().isEmpty()) {
+            return mnJp.length() >= 1 && mnJp.length() <= 255;
         }
         return true;
     }
@@ -173,7 +204,15 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-    
+
+    @AssertTrue(message = "旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpHiraLengthValid() {
+        if (mnJpHira != null && !mnJpHira.trim().isEmpty()) {
+            return mnJpHira.length() >= 1 && mnJpHira.length() <= 255;
+        }
+        return true;
+    }
+
     @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
     public boolean isMiddleNameJpKataValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
@@ -183,7 +222,15 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-    
+
+    @AssertTrue(message = "旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpKataLengthValid() {
+        if (mnJpKata != null && !mnJpKata.trim().isEmpty()) {
+            return mnJpKata.length() >= 1 && mnJpKata.length() <= 255;
+        }
+        return true;
+    }
+
     @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
     public boolean isMiddleNameEnValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
@@ -193,4 +240,13 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
+
+    @AssertTrue(message = "旧姓(英語)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameEnLengthValid() {
+        if (mnEn != null && !mnEn.trim().isEmpty()) {
+            return mnEn.length() >= 1 && mnEn.length() <= 255;
+        }
+        return true;
+    }
+
 }
