@@ -9,6 +9,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import com.example.demo.Validator.DateFormat;
+import com.example.demo.Validator.DigitNumber;
+import com.example.demo.Validator.HalfNumber;
+
 import lombok.Data;
 
 @Data
@@ -92,13 +96,14 @@ public class UserForm implements ValidationGroups {
     private String password;
 
     @NotNull(message = "社員番号を入力してください。")
-    
+    @HalfNumber
+    @DigitNumber
     private Integer employeeNo;
 
     private Integer currentEmployeeNo;
 
     @NotNull(message = "入社日を入力してください。")
-  
+    @DateFormat
     private LocalDate joiningDate;
 
     private Boolean englishNotation;
@@ -248,5 +253,4 @@ public class UserForm implements ValidationGroups {
         }
         return true;
     }
-
 }
