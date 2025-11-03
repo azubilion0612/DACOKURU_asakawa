@@ -61,28 +61,148 @@ public class UserForm implements ValidationGroups {
     private String lnEn;
 
     // 旧姓の入力が必要な場合にチェック
-    @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "旧姓(正式表示)は全角で入力してください。")
+    @AssertTrue(message = "旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpLengthValid() {
+        if (olnJp != null && !olnJp.trim().isEmpty()) {
+            return olnJp.length() >= 1 && olnJp.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "旧姓(正式表示)は全角で入力してください。")
+    public boolean isOldNameJpFormatValid() {
+        if (olnJp != null && !olnJp.trim().isEmpty()) {
+            String fullWidthOlnJpRegex = "^[\\u3040-\\u309F\\u30A0-\\u30FF\\u4E00-\\u9FFF]+$";
+            return olnJp.matches(fullWidthOlnJpRegex);
+        }
+        return true;
+    }
     private String olnJp;
 
-    @Pattern(regexp = "^[\\u3040-\\u309F]+$", message = "旧姓(ひらがな)は全角ひらがなで入力してください。")
+    @AssertTrue(message = "旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpHiraLengthValid() {
+        if (olnJpHira != null && !olnJpHira.trim().isEmpty()) {
+            return olnJpHira.length() >= 1 && olnJpHira.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "旧姓(ひらがな)は全角ひらがなで入力してください。")
+    public boolean isOldNameJpHiraFormatValid() {
+        if (olnJpHira != null && !olnJpHira.trim().isEmpty()) {
+            String fullWidthOlnJpHiraRegex = "^[\\u3040-\\u309F]+$";
+            return olnJpHira.matches(fullWidthOlnJpHiraRegex);
+        }
+        return true;
+    }
     private String olnJpHira;
 
-    @Pattern(regexp = "^[\\u30A0-\\u30FF]+$", message = "旧姓(カタカナ)は全角カタカナで入力してください。")
+    @AssertTrue(message = "旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameJpKataLengthValid() {
+        if (olnJpKata != null && !olnJpKata.trim().isEmpty()) {
+            return olnJpKata.length() >= 1 && olnJpKata.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "旧姓(カタカナ)は全角カタカナで入力してください。")
+    public boolean isOldNameJpKataFormatValid() {
+        if (olnJpKata != null && !olnJpKata.trim().isEmpty()) {
+            String fullWidthOlnJpKataRegex = "^[\\\\u30A0-\\\\u30FF]+$";
+            return olnJpKata.matches(fullWidthOlnJpKataRegex);
+        }
+        return true;
+    }
     private String olnJpKata;
 
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "旧姓(英語)は半角で入力してください。")
+    @AssertTrue(message = "旧姓(英語)は1文字以上、255文字以内で入力してください。")
+    public boolean isOldNameEnLengthValid() {
+        if (olnEn != null && !olnEn.trim().isEmpty()) {
+            return olnEn.length() >= 1 && olnEn.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "旧姓(英語)は半角で入力してください。")
+    public boolean isOldNameEnFormatValid() {
+        if (olnEn != null && !olnEn.trim().isEmpty()) {
+            String fullWidthOlnEnRegex = "^[a-zA-Z]+$";
+            return olnEn.matches(fullWidthOlnEnRegex);
+        }
+        return true;
+    }
     private String olnEn;
 
-    @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "ミドルネーム(正式表示)は全角で入力してください。")
+    @AssertTrue(message = "ミドルネーム(正式表示)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpLengthValid() {
+        if (mnJp != null && !mnJp.trim().isEmpty()) {
+            return mnJp.length() >= 1 && mnJp.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "ミドルネーム(正式表示)は全角で入力してください。")
+    public boolean isMiddleNameJpFormatValid() {
+        if (mnJp != null && !mnJp.trim().isEmpty()) {
+            String fullWidthMnJpRegex = "^[\\u3040-\\u309F\\u30A0-\\u30FF\\u4E00-\\u9FFF]+$";
+            return mnJp.matches(fullWidthMnJpRegex);
+        }
+        return true;
+    }
     private String mnJp;
 
-    @Pattern(regexp = "^[\\u3040-\\u309F]+$", message = "ミドルネーム(ひらがな)は全角ひらがなで入力してください。")
+    @AssertTrue(message = "ミドルネーム(ひらがな)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpHiraLengthValid() {
+        if (mnJpHira != null && !mnJpHira.trim().isEmpty()) {
+            return mnJpHira.length() >= 1 && mnJpHira.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "ミドルネーム(ひらがな)は全角ひらがなで入力してください。")
+    public boolean isMiddleNameJpHiraFormatValid() {
+        if (mnJpHira != null && !mnJpHira.trim().isEmpty()) {
+            String fullWidthMnJpHiraRegex = "^[\\u3040-\\u309F]+$";
+            return mnJpHira.matches(fullWidthMnJpHiraRegex);
+        }
+        return true;
+    }
     private String mnJpHira;
 
-    @Pattern(regexp = "^[\\u30A0-\\u30FF]+$", message = "ミドルネーム(カタカナ)は全角カタカナで入力してください。")
+    @AssertTrue(message = "ミドルネーム(カタカナ)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameJpKataLengthValid() {
+        if (mnJpKata != null && !mnJpKata.trim().isEmpty()) {
+            return mnJpKata.length() >= 1 && mnJpKata.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "ミドルネーム(カタカナ)は全角カタカナで入力してください。")
+    public boolean isMiddleNameJpKataFormatValid() {
+        if (mnJpKata != null && !mnJpKata.trim().isEmpty()) {
+            String fullWidthMnJpKataRegex = "^[\\\\u30A0-\\\\u30FF]+$";
+            return mnJpKata.matches(fullWidthMnJpKataRegex);
+        }
+        return true;
+    }
     private String mnJpKata;
 
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "ミドルネーム(英語)は半角で入力してください。")
+    @AssertTrue(message = "ミドルネーム(英語)は1文字以上、255文字以内で入力してください。")
+    public boolean isMiddleNameEnLengthValid() {
+        if (mnEn != null && !mnEn.trim().isEmpty()) {
+            return mnEn.length() >= 1 && mnEn.length() <= 255;
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "ミドルネーム(英語)は半角で入力してください。")
+    public boolean isMiddleNameEnFormatValid() {
+        if (mnEn != null && !mnEn.trim().isEmpty()) {
+            String fullWidthMnEnRegex = "^[a-zA-Z]+$";
+            return mnEn.matches(fullWidthMnEnRegex);
+        }
+        return true;
+    }
     private String mnEn;
 
     @NotBlank(message = "メールアドレスを入力してください。")
@@ -119,28 +239,12 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
-    public boolean isOldNameJpLengthValid() {
-        if (olnJp != null && !olnJp.trim().isEmpty()) {
-            return olnJp.length() >= 1 && olnJp.length() <= 255;
-        }
-        return true;
-    }
-
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameJpHiraValid() {
         if ((olnJp != null && !olnJp.isEmpty()) ||
                 (olnJpKata != null && !olnJpKata.isEmpty()) ||
                 (olnEn != null && !olnEn.isEmpty())) {
             return olnJpHira != null && !olnJpHira.isEmpty();
-        }
-        return true;
-    }
-
-    @AssertTrue(message = "旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
-    public boolean isOldNameJpHiraLengthValid() {
-        if (olnJpHira != null && !olnJpHira.trim().isEmpty()) {
-            return olnJpHira.length() >= 1 && olnJpHira.length() <= 255;
         }
         return true;
     }
@@ -155,28 +259,12 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
-    public boolean isOldNameJpKataLengthValid() {
-        if (olnJpKata != null && !olnJpKata.trim().isEmpty()) {
-            return olnJpKata.length() >= 1 && olnJpKata.length() <= 255;
-        }
-        return true;
-    }
-
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameEnValid() {
         if ((olnJp != null && !olnJp.isEmpty()) ||
                 (olnJpHira != null && !olnJpHira.isEmpty()) ||
                 (olnJpKata != null && !olnJpKata.isEmpty())) {
             return olnEn != null && !olnEn.isEmpty();
-        }
-        return true;
-    }
-
-    @AssertTrue(message = "旧姓(英語)は1文字以上、255文字以内で入力してください。")
-    public boolean isOldNameEnLengthValid() {
-        if (olnEn != null && !olnEn.trim().isEmpty()) {
-            return olnEn.length() >= 1 && olnEn.length() <= 255;
         }
         return true;
     }
@@ -192,28 +280,12 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "旧姓(正式表示)は1文字以上、255文字以内で入力してください。")
-    public boolean isMiddleNameJpLengthValid() {
-        if (mnJp != null && !mnJp.trim().isEmpty()) {
-            return mnJp.length() >= 1 && mnJp.length() <= 255;
-        }
-        return true;
-    }
-
     @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
     public boolean isMiddleNameJpHiraValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
                 (mnJpKata != null && !mnJpKata.isEmpty()) ||
                 (mnEn != null && !mnEn.isEmpty())) {
             return mnJpHira != null && !mnJpHira.isEmpty();
-        }
-        return true;
-    }
-
-    @AssertTrue(message = "旧姓(ひらがな)は1文字以上、255文字以内で入力してください。")
-    public boolean isMiddleNameJpHiraLengthValid() {
-        if (mnJpHira != null && !mnJpHira.trim().isEmpty()) {
-            return mnJpHira.length() >= 1 && mnJpHira.length() <= 255;
         }
         return true;
     }
@@ -228,28 +300,12 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "旧姓(カタカナ)は1文字以上、255文字以内で入力してください。")
-    public boolean isMiddleNameJpKataLengthValid() {
-        if (mnJpKata != null && !mnJpKata.trim().isEmpty()) {
-            return mnJpKata.length() >= 1 && mnJpKata.length() <= 255;
-        }
-        return true;
-    }
-
     @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
     public boolean isMiddleNameEnValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
                 (mnJpHira != null && !mnJpHira.isEmpty()) ||
                 (mnJpKata != null && !mnJpKata.isEmpty())) {
             return mnEn != null && !mnEn.isEmpty();
-        }
-        return true;
-    }
-
-    @AssertTrue(message = "旧姓(英語)は1文字以上、255文字以内で入力してください。")
-    public boolean isMiddleNameEnLengthValid() {
-        if (mnEn != null && !mnEn.trim().isEmpty()) {
-            return mnEn.length() >= 1 && mnEn.length() <= 255;
         }
         return true;
     }

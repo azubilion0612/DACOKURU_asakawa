@@ -47,56 +47,64 @@
                     <span th:if="${#fields.hasErrors('oldNameJpValid')}" th:errors="*{oldNameJpValid}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('oldNameJpLengthValid')}"
                         th:errors="*{oldNameJpLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpFormatValid')}" th:errors="*{oldNameJpFormatValid}" class="error-message"></span>
     
                     <label for="oln_jp_hira">旧姓(ひらがな)</label>
                     <input id="oln_jp_hira" type="text" name="olnJpHira" th:value="*{olnJpHira}">
                     <span th:if="${#fields.hasErrors('olnJpHira')}" th:errors="*{olnJpHira}"
                         class="error-message"></span>
                     <span th:if="${#fields.hasErrors('oldNameJpHiraValid')}" th:errors="*{oldNameJpHiraValid}" class="error-message"></span>
-                    <span th:if="${#fields.hasErrors('oldNameJpHiraLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('oldNameJpHiraLengthValid')}"
                         th:errors="*{oldNameJpHiraLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpHiraFormatValid')}" th:errors="*{oldNameJpHiraFormatValid}" class="error-message"></span>
     
                     <label for="oln_jp_kata">旧姓(カタカナ)</label>
                     <input id="oln_jp_kata" type="text" name="olnJpKata" th:value="*{olnJpKata}">
                     <span th:if="${#fields.hasErrors('olnJpKata')}" th:errors="*{olnJpKata}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('oldNameJpKataValid')}" th:errors="*{oldNameJpKataValid}" class="error-message"></span>
-                    <span th:if="${#fields.hasErrors('oldNameJpKataLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('oldNameJpKataLengthValid')}"
                         th:errors="*{oldNameJpKataLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameJpKataFormatValid')}" th:errors="*{oldNameJpKataFormatValid}" class="error-message"></span>
     
                     <label for="oln_en">旧姓(英語)</label>
                     <input id="oln_en" type="text" name="olnEn" th:value="*{olnEn}">
                     <span th:if="${#fields.hasErrors('olnEn')}" th:errors="*{olnEn}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('oldNameEnValid')}" th:errors="*{oldNameEnValid}" class="error-message"></span>
-                    <span th:if="${#fields.hasErrors('oldNameEnLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('oldNameEnLengthValid')}"
                         th:errors="*{oldNameEnLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('oldNameEnFormatValid')}" th:errors="*{oldNameEnFormatValid}" class="error-message"></span>
     
                     <label for="mn_jp">ミドルネーム(正式表示)</label>
                     <input id="mn_jp" type="text" name="mnJp" th:value="*{mnJp}">
                     <span th:if="${#fields.hasErrors('mnJp')}" th:errors="*{mnJp}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('middleNameJpValid')}" th:errors="*{middleNameJpValid}"  class="error-message"></span>
-                    <span th:if="${#fields.hasErrors('middleNameJpLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('middleNameJpLengthValid')}"
                         th:errors="*{middleNameJpLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpFormatValid')}" th:errors="*{middleNameJpFormatValid}" class="error-message"></span>
     
                     <label for="mn_jp_hira">ミドルネーム(ひらがな)</label>
                     <input id="mn_jp_hira" type="text" name="mnJpHira" th:value="*{mnJpHira}">
                     <span th:if="${#fields.hasErrors('mnJpHira')}" th:errors="*{mnJpHira}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('middleNameJpHiraValid')}" th:errors="*{middleNameJpHiraValid}" class="error-message">></span>
-                    <span th:if="${#fields.hasErrors('middleNameJpHiraLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('middleNameJpHiraLengthValid')}"
                         th:errors="*{middleNameJpHiraLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpHiraFormatValid')}" th:errors="*{middleNameJpHiraFormatValid}" class="error-message"></span>
     
                     <label for="mn_jp_kata">ミドルネーム(カタカナ)</label>
                     <input id="mn_jp_kata" type="text" name="mnJpKata" th:value="*{mnJpKata}">
                     <span th:if="${#fields.hasErrors('mnJpKata')}" th:errors="*{mnJpKata}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('middleNameJpKataValid')}" th:errors="*{middleNameJpKataValid}" class="error-message">></span>
-                    <span th:if="${#fields.hasErrors('middleNameJpKataLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('middleNameJpKataLengthValid')}"
                         th:errors="*{middleNameJpKataLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameJpKataFormatValid')}" th:errors="*{middleNameJpKataFormatValid}" class="error-message"></span>
     
                     <label for="mn_en">ミドルネーム(英語)</label>
                     <input id="mn_en" type="text" name="mnEn" th:value="*{mnEn}">
                     <span th:if="${#fields.hasErrors('mnEn')}" th:errors="*{mnEn}" class="error-message"></span>
                     <span th:if="${#fields.hasErrors('middleNameEnValid')}" th:errors="*{middleNameEnValid}" class="error-message">></span>
-                    <span th:if="${#fields.hasErrors('middleNameEnLengthValid')}" 
+                    <span th:if="${#fields.hasErrors('middleNameEnLengthValid')}"
                         th:errors="*{middleNameEnLengthValid}" class="error-message"></span>
+                    <span th:if="${#fields.hasErrors('middleNameEnFormatValid')}" th:errors="*{middleNameEnFormatValid}" class="error-message"></span>
     
                     <label for="email">※メールアドレス</label>
                     <input id="email" type="email" name="email" th:value="*{email}">
