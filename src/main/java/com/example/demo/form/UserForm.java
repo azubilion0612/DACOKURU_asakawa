@@ -2,6 +2,7 @@ package com.example.demo.form;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -206,12 +207,13 @@ public class UserForm implements ValidationGroups {
     private String mnEn;
 
     @NotBlank(message = "メールアドレスを入力してください。")
+    @Column(unique = true, nullable = false)
     @Email(message = "メールアドレスの形式が正しくありません。")
-    @Size(max = 255, message = "メールアドレスは255文字以内で入力してください。")
+    @Size(min = 1,max = 255, message = "メールアドレスは1文字以上、255文字以内で入力してください。")
     private String email;
 
     @NotBlank(message = "パスワードを入力してください。")
-    @Size(min = 8, max = 255, message = "パスワードは8文字以上255文字以内で入力してください。")
+    @Size(min = 8, max = 255, message = "パスワードは8文字以上、255文字以内で入力してください。")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "パスワードは半角英数字で入力してください。")
     private String password;
 
