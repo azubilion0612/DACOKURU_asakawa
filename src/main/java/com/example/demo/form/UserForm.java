@@ -22,7 +22,7 @@ public class UserForm implements ValidationGroups {
     private Long id;
 
     @NotBlank(message = "名前(正式表示)を入力してください。")
-    @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "名前(正式表示)は全角で入力してください。")
+    @Pattern(regexp = "^[^\\\\x00-\\\\x7F]+$", message = "名前(正式表示)は全角で入力してください。")
     @Size(min = 1, max = 255, message ="名前（正式表示）は1文字以上、255文字以内で入力してください。")
     private String fnJp;
 
@@ -73,7 +73,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "旧姓(正式表示)は全角で入力してください。")
     public boolean isOldNameJpFormatValid() {
         if (olnJp != null && !olnJp.trim().isEmpty()) {
-            String fullWidthOlnJpRegex = "^[\\u3040-\\u309F\\u30A0-\\u30FF\\u4E00-\\u9FFF]+$";
+            String fullWidthOlnJpRegex = "^[^\\\\x00-\\\\x7F]+$";
             return olnJp.matches(fullWidthOlnJpRegex);
         }
         return true;
@@ -127,8 +127,8 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "旧姓(英語)は半角で入力してください。")
     public boolean isOldNameEnFormatValid() {
         if (olnEn != null && !olnEn.trim().isEmpty()) {
-            String fullWidthOlnEnRegex = "^[a-zA-Z]+$";
-            return olnEn.matches(fullWidthOlnEnRegex);
+            String halfWidthOlnEnRegex = "^[a-zA-Z]+$";
+            return olnEn.matches(halfWidthOlnEnRegex);
         }
         return true;
     }
@@ -145,7 +145,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "ミドルネーム(正式表示)は全角で入力してください。")
     public boolean isMiddleNameJpFormatValid() {
         if (mnJp != null && !mnJp.trim().isEmpty()) {
-            String fullWidthMnJpRegex = "^[\\u3040-\\u309F\\u30A0-\\u30FF\\u4E00-\\u9FFF]+$";
+            String fullWidthMnJpRegex = "^[^\\\\x00-\\\\x7F]+$";
             return mnJp.matches(fullWidthMnJpRegex);
         }
         return true;
@@ -199,16 +199,16 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "ミドルネーム(英語)は半角で入力してください。")
     public boolean isMiddleNameEnFormatValid() {
         if (mnEn != null && !mnEn.trim().isEmpty()) {
-            String fullWidthMnEnRegex = "^[a-zA-Z]+$";
-            return mnEn.matches(fullWidthMnEnRegex);
+            String halfWidthMnEnRegex = "^[a-zA-Z]+$";
+            return mnEn.matches(halfWidthMnEnRegex);
         }
         return true;
     }
     private String mnEn;
 
     @NotBlank(message = "メールアドレスを入力してください。")
-    @Column(unique = true, nullable = false)
-    @Email(message = "メールアドレスの形式が正しくありません。")
+    @Email(message = "メールアドレスは正しい形式で入力してください。")
+    @Column(unique = true)
     @Size(min = 1,max = 255, message = "メールアドレスは1文字以上、255文字以内で入力してください。")
     private String email;
 
