@@ -109,7 +109,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "旧姓(カタカナ)は全角カタカナで入力してください。")
     public boolean isOldNameJpKataFormatValid() {
         if (olnJpKata != null && !olnJpKata.trim().isEmpty()) {
-            String fullWidthOlnJpKataRegex = "^[\\\\u30A0-\\\\u30FF]+$";
+            String fullWidthOlnJpKataRegex = "^[\\u30A1-\\u30FC]+$";
             return olnJpKata.matches(fullWidthOlnJpKataRegex);
         }
         return true;
@@ -181,7 +181,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "ミドルネーム(カタカナ)は全角カタカナで入力してください。")
     public boolean isMiddleNameJpKataFormatValid() {
         if (mnJpKata != null && !mnJpKata.trim().isEmpty()) {
-            String fullWidthMnJpKataRegex = "^[\\\\u30A0-\\\\u30FF]+$";
+            String fullWidthMnJpKataRegex = "^[\\u30A1-\\u30FC]+$";
             return mnJpKata.matches(fullWidthMnJpKataRegex);
         }
         return true;

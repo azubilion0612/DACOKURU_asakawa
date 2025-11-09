@@ -30,6 +30,11 @@ public class UserController {
     private final UserService userService;
     private final NameService nameService;
 
+    @GetMapping("/user/index")
+    public String index(){
+        return "users/index";
+    }
+
     @GetMapping("/user/create")
     public String create(Model model) {
         if (!model.containsAttribute("userForm")) {
