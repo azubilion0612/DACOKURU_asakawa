@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import java.beans.PropertyEditorSupport;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +32,56 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final NameService nameService;
+    
+    /**
+     * employeeNoフィールドのカスタム型変換設定
+     * 全角数字を半角数字に変換してバインディングエラーを防ぎ、
+     * カスタムバリデーターが実行されるようにする
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Integer.class, "employeeNo", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                if (text == null || text.trim().isEmpty()) {
+                    setValue(null);
+                    return;
+                }
+                
+                String trimmedText = text.trim();
+                String converted = convertFullWidthToHalfWidth(trimmedText);
+                
+                try {
+                    setValue(Integer.valueOf(converted));
+                } catch (NumberFormatException e) {
+                    setValue(-1);
+                }
+            }
+            
+            @Override
+            public String getAsText() {
+                Object value = getValue();
+                return (value != null) ? value.toString() : "";
+            }
+        });
+    }
+    
+    /**
+     * 全角数字を半角数字に変換
+     */
+    private String convertFullWidthToHalfWidth(String input) {
+        if (input == null) return null;
+        
+        StringBuilder sb = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (c >= '０' && c <= '９') {
+                sb.append((char) (c - '０' + '0'));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
 
     @GetMapping("/user/index")
     public String index(){
