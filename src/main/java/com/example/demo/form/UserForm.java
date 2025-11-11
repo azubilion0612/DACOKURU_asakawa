@@ -22,7 +22,7 @@ public class UserForm implements ValidationGroups {
     private Long id;
 
     @NotBlank(message = "名前(正式表示)を入力してください。")
-    @Pattern(regexp = "^[^\\\\x00-\\\\x7F]+$", message = "名前(正式表示)は全角で入力してください。")
+    @Pattern(regexp = "^[^ -~｡-ﾟ]+$", message = "名前(正式表示)は全角で入力してください。")
     @Size(min = 1, max = 255, message ="名前（正式表示）は1文字以上、255文字以内で入力してください。")
     private String fnJp;
 
@@ -73,7 +73,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "旧姓(正式表示)は全角で入力してください。")
     public boolean isOldNameJpFormatValid() {
         if (olnJp != null && !olnJp.trim().isEmpty()) {
-            String fullWidthOlnJpRegex = "^[^\\\\x00-\\\\x7F]+$";
+            String fullWidthOlnJpRegex = "^[^ -~｡-ﾟ]+$";
             return olnJp.matches(fullWidthOlnJpRegex);
         }
         return true;
@@ -145,7 +145,7 @@ public class UserForm implements ValidationGroups {
     @AssertTrue(message = "ミドルネーム(正式表示)は全角で入力してください。")
     public boolean isMiddleNameJpFormatValid() {
         if (mnJp != null && !mnJp.trim().isEmpty()) {
-            String fullWidthMnJpRegex = "^[^\\\\x00-\\\\x7F]+$";
+            String fullWidthMnJpRegex = "^[^ -~｡-ﾟ]+$";
             return mnJp.matches(fullWidthMnJpRegex);
         }
         return true;
@@ -220,7 +220,7 @@ public class UserForm implements ValidationGroups {
     @NotNull(message = "社員番号を入力してください。")
     @HalfNumber
     @DigitNumber
-    private Integer employeeNo;
+    private Long employeeNo;
 
     private Integer currentEmployeeNo;
 

@@ -3,14 +3,14 @@ package com.example.demo.Validator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class DigitNumberValidator implements ConstraintValidator<DigitNumber, Integer>{
+public class DigitNumberValidator implements ConstraintValidator<DigitNumber, Long>{
 
     @Override
     public void initialize(DigitNumber digitnumber) {
     }
 
     @Override
-    public boolean isValid(Integer value, ConstraintValidatorContext context) {
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
         if (value == null) {
             return true;
         }

@@ -3,14 +3,14 @@ package com.example.demo.Validator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class HalfNumberValidator implements ConstraintValidator<HalfNumber, Integer> {
+public class HalfNumberValidator implements ConstraintValidator<HalfNumber, Long> {
 
     @Override
     public void initialize(HalfNumber halfnumber) {
     }
     
     @Override
-    public boolean isValid(Integer value, ConstraintValidatorContext context) {
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
         if (value == null) {
             return true;
     }
