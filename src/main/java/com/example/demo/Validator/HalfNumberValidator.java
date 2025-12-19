@@ -13,10 +13,10 @@ public class HalfNumberValidator implements ConstraintValidator<HalfNumber, Long
     public boolean isValid(Long value, ConstraintValidatorContext context) {
         if (value == null) {
             return true;
-    }
+        }
 
-    String strValue = String.valueOf(value);
-    return strValue.matches("\\d+");
-    }
+        String strValue = String.valueOf(value);
+        return strValue.matches("\\d+");
+        }
 
 }

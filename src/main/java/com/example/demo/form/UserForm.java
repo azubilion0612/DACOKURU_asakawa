@@ -209,7 +209,7 @@ public class UserForm implements ValidationGroups {
     @NotBlank(message = "メールアドレスを入力してください。")
     @Email(message = "メールアドレスは正しい形式で入力してください。")
     @Column(unique = true)
-    @Size(min = 1,max = 255, message = "メールアドレスは1文字以上、255文字以内で入力してください。")
+    @Size(min = 1, max = 255, message = "メールアドレスは1文字以上、255文字以内で入力してください。")
     private String email;
 
     @NotBlank(message = "パスワードを入力してください。")
@@ -230,7 +230,7 @@ public class UserForm implements ValidationGroups {
 
     private Boolean englishNotation;
 
- // 旧姓フィールドのいずれかが入力された場合は、それ以外の旧姓フィールドも必須
+    // 旧姓フィールドのいずれかが入力された場合は、それ以外の旧姓フィールドも必須
     @AssertTrue(message = "旧姓の各欄に一つでも入力があった場合は必須です。")
     public boolean isOldNameJpValid() {
         if ((olnJpHira != null && !olnJpHira.isEmpty()) ||
@@ -271,8 +271,8 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
- // 旧姓フィールドのいずれかが入力された場合は、それ以外の旧姓フィールドも必須
-    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
+    // 旧姓フィールドのいずれかが入力された場合は、それ以外の旧姓フィールドも必須
+    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。")
     public boolean isMiddleNameJpValid() {
         if ((mnJpHira != null && !mnJpHira.isEmpty()) ||
                 (mnJpKata != null && !mnJpKata.isEmpty()) ||
@@ -282,7 +282,7 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
+    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。")
     public boolean isMiddleNameJpHiraValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
                 (mnJpKata != null && !mnJpKata.isEmpty()) ||
@@ -292,7 +292,7 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
+    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。")
     public boolean isMiddleNameJpKataValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
                 (mnJpHira != null && !mnJpHira.isEmpty()) ||
@@ -302,7 +302,7 @@ public class UserForm implements ValidationGroups {
         return true;
     }
 
-    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。	")
+    @AssertTrue(message = "ミドルネームの各欄に一つでも入力があった場合は必須です。")
     public boolean isMiddleNameEnValid() {
         if ((mnJp != null && !mnJp.isEmpty()) ||
                 (mnJpHira != null && !mnJpHira.isEmpty()) ||

@@ -14,7 +14,8 @@ public class DigitNumberValidator implements ConstraintValidator<DigitNumber, Lo
         if (value == null) {
             return true;
         }
-    int length = String.valueOf(Math.abs(value)).length();
-    return length >= 1 && length <= 10;
-    }
+
+        int length = String.valueOf(Math.abs(value)).length();
+        return length >= 1 && length <= 10;
+        }
 }
