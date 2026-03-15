@@ -33,7 +33,7 @@
                     <input id="ln_jp_hira" type="text" name="lnJpHira" th:value="*{lnJpHira}">
                     <span th:if="${#fields.hasErrors('lnJpHira')}" th:errors="*{lnJpHira}" class="error-message"></span>
     
-                    <label for="ln_jp_kata">※姓(カタカナ)</label>
+                    <label for="ln_jp_kata"><span style="color:red">※</span>姓(カタカナ)</label>
                     <input id="ln_jp_kata" type="text" name="lnJpKata" th:value="*{lnJpKata}">
                     <span th:if="${#fields.hasErrors('lnJpKata')}" th:errors="*{lnJpKata}" class="error-message"></span>
     
